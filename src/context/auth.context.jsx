@@ -63,7 +63,7 @@ function AuthWrapper(props) {
   }
 
   if (isValidatingToken) {
-    return <h3>... validando usuario</h3>
+    return <h3>... Cargando</h3>
   }
 
   return (
