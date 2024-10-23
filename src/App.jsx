@@ -21,6 +21,7 @@ function App() {
         <Route path="/registro" element={<Signup />} />
         <Route path="/" element={<Landing />} />
         <Route path="/admin/products" element={<ProductAdmin />} />
+        <Route path="/admin/products/new" element={<AddProduct/>} />
       </Routes>
     </Template>
   );

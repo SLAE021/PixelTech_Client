@@ -70,6 +70,7 @@ function AuthWrapper(props) {
     );
   }
 
+  
   return (
     <AuthContext.Provider value={passedContext}>
       {props.children}
