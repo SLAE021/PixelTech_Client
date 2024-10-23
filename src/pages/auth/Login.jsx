@@ -28,7 +28,7 @@ const Login = () => {
 
       try {
         //const response = await service.post("/auth/login", userCredentials);
-        const response = axios.post("https://pixeltech.netlify.app/api/auth/login", userCredentials);
+        const response = axios.post("https://pixeltech-server.onrender.com/api/auth/login", userCredentials);
         localStorage.setItem("authToken", response.data.authToken);
         await authenticateUser();
         //al autenticar al usuario, redirigimos a la landing page
