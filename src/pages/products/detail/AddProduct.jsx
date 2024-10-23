@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddProduct() {
     const [productName, setProductName] = useState("");
-    const [productDescription, setProductId] = useState("");
+    const [productDescription, setproductDescription] = useState("");
     const [productPrice, setProductPrice] = useState("");
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState(""); 
