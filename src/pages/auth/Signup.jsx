@@ -1,6 +1,8 @@
-import service from "../../services/config";
+//import service from "../../services/config";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../../services/config.js";
+import axios from "axios";
 
 function Signup() {
 
@@ -25,7 +27,8 @@ function Signup() {
       password
     }
     try {
-      const response = await service.post("/auth/Signup", newUser)
+      //const response = await service.post("/auth/Signup", newUser)
+      const response = axios.post(`${API_BASE_URL}/api/auth/signup`, newUser)
       localStorage.setItem("authToken", response.data.authToken)
       //mostrar mensaje de exito y redireccionar a la landing page
       navigate("/")
@@ -35,7 +38,7 @@ function Signup() {
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message)
       } else {
-        //! aqui deberia haber redirección a /error
+       
       }
     }
   };
