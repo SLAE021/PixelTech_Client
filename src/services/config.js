@@ -1,5 +1,5 @@
 import axios from "axios";
-export const API_BASE_URL = import.meta.env.PIXELTECH_SERVER || 'http://localhost:5005';
+export const API_BASE_URL = import.meta.env.VITE_PIXELTECH_SERVER;
 
 
 

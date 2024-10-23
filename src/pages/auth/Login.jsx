@@ -1,13 +1,13 @@
-//import service from "../../services/config.js";
+import service from "../../services/config.js";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context.jsx"
-import API_BASE_URL from "../../services/config.js";
-import axios from "axios";
+
 
 
 const Login = () => {
 
+  console.log(import.meta.env.VITE_PIXELTECH_SERVER)
   const navigate = useNavigate()
   const { authenticateUser } = useContext(AuthContext)
 
@@ -27,8 +27,7 @@ const Login = () => {
       }
 
       try {
-        //const response = await service.post("/auth/login", userCredentials);
-        const response = axios.post("https://pixeltech-server.onrender.com/api/auth/login", userCredentials);
+        const response = await service.post("/auth/login", userCredentials);
         localStorage.setItem("authToken", response.data.authToken);
         await authenticateUser();
         //al autenticar al usuario, redirigimos a la landing page
