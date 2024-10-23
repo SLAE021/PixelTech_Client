@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 
-const AddProduct = () => {
+function AddProduct() {
     const [productName, setProductName] = useState("");
     const [productId, setProductId] = useState("");
     const [productPrice, setProductPrice] = useState("");

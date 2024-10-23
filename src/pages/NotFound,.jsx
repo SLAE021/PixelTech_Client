@@ -12,7 +12,7 @@ function NotFound() {
       <h5>Click on the Logo to go back home</h5>
 
       <Link to={"/"}>
-        <img />
+        <img src="./src/assets/notfound.jpg"/>
      </Link>
 
     </div>

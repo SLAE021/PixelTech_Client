@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
 // pages
 import Template from "./pages/template/Template";
@@ -8,23 +8,24 @@ import Landing from "./pages/landing/Landing";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ProductList from "./pages/products/ProductList";
-
+import AddProduct from "./pages/products/detail/AddProduct";
 import ProductAdmin from "./pages/adminProducts/ProductAdmin";
 
 function App() {
+
   return (
-    <Template>
-      <Routes>
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:slug" element={<ProductDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Signup />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/admin/products" element={<ProductAdmin />} />
-        <Route path="/admin/products/new" element={<AddProduct/>} />
-      </Routes>
-    </Template>
+      <Template>
+        <Routes>
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Signup />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/admin/products" element={<ProductAdmin />} />
+          <Route path="/admin/add-product" element={<AddProduct />} />
+        </Routes>
+      </Template>
   );
 }
 
-export default App;
+export default App
