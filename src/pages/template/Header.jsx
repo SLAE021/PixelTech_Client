@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
 
 function Header() {
-
+  const navigate = useNavigate()
   const [openedDrawer, setOpenedDrawer] = useState(false)
+  const { isLoggedIn, isAdmin, authenticateUser } = useContext(AuthContext);
 
   function toggleDrawer() {
     setOpenedDrawer(!openedDrawer);
@@ -14,6 +16,21 @@ function Header() {
     if (openedDrawer) {
       setOpenedDrawer(false)
     }
+  }
+
+  const handleLogout = async () => {
+
+    try {
+      localStorage.removeItem("authToken") // removemos el token
+
+      await authenticateUser() // validat el token, la funcion cambia los estados
+
+      navigate("/") // navegamos a cualquier página pública
+
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   return (
@@ -37,7 +54,7 @@ function Header() {
               <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
               <span className="ms-3 badge rounded-pill bg-dark">0</span>
             </button>
-            <ul className="navbar-nav mb-2 mb-lg-0">
+            <ul className="navbar-nav mb-4 mb-lg-0">
               <li className="nav-item dropdown">
                 <a
                   href="!#"
@@ -54,16 +71,34 @@ function Header() {
                   className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="userDropdown"
                 >
+                  {isLoggedIn && isAdmin && (
+                  <li>
+                    <Link to="/admin/products" className="dropdown-item" onClick={changeNav}>
+                      Admin
+                    </Link>
+                  </li>
+                  )}
+                  {!isLoggedIn && (
                   <li>
                     <Link to="/login" className="dropdown-item" onClick={changeNav}>
                       Login
                     </Link>
                   </li>
+                  )}
+                  {!isLoggedIn && (
                   <li>
                     <Link to="/registro" className="dropdown-item" onClick={changeNav}>
                       Registro
                     </Link>
                   </li>
+                  )}
+                  {isAdmin && (
+                  <li>
+                    <Link className="dropdown-item" onClick={handleLogout}>
+                     Cerrar sesión
+                    </Link>
+                  </li>
+                  )}
                 </ul>
               </li>
             </ul>

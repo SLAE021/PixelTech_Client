@@ -1,10 +1,28 @@
 import Banner from "./Banner";
 import FeatureProduct from "./FeatureProduct";
+import { useState, useEffect } from "react";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import service from "../../services/config";
 
 function Landing() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await service.get("/products");
+        setProducts(response.data);
+        console.log("Products fetched:", response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <ScrollToTopOnMount />
@@ -20,12 +38,36 @@ function Landing() {
           </Link>
         </div>
       </div>
-      <h2 className="text-muted text-center mt-4 mb-3">New Arrival</h2>
+      <h2 className="text-muted text-center mt-4 mb-3">Nuevos Productos</h2>
       <div className="container pb-5 px-lg-5">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5">
-          {Array.from({ length: 6 }, (_, i) => {
-            return <FeatureProduct key={i} />;
-          })}
+          {products.map((product) => (
+            <div key={product.id} className="col">
+              <div className="card shadow-sm">
+                <img
+                  className="card-img-top bg-dark cover"
+                  height="240"
+                  alt=""
+                  src={product.Image}
+                />
+                <div className="card-body">
+                  <h5 className="card-title text-center">{product.name}</h5>
+                  <p className="card-text text-center text-muted">
+                    {product.price} €
+                  </p>
+                  <div className="d-grid gap-2">
+                    <Link
+                      to="/products/1"
+                      className="btn btn-outline-dark"
+                      replace
+                    >
+                      Ver más
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <div className="d-flex flex-column bg-white py-4">
