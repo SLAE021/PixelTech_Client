@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddProduct() {
     const [productName, setProductName] = useState("");
-    const [productId, setProductId] = useState("");
+    const [productDescription, setProductId] = useState("");
     const [productPrice, setProductPrice] = useState("");
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState(""); 
@@ -22,7 +22,7 @@ function AddProduct() {
         
         let validationErrors = {};
         if (!productName) validationErrors.productName = "Product Name Can't Be Empty";
-        //if (!productId) validationErrors.productId = "Product ID Can't Be Empty";
+        if (!productDescription) validationErrors.productDescription = "Product Description Can't Be Empty";
         if (!productPrice) validationErrors.productPrice = "Product Price Can't Be Empty";
         if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
         if (!productCategory) validationErrors.productCategory = "Product Category Can't Be Empty";
@@ -33,7 +33,7 @@ function AddProduct() {
        
         const formData = new FormData();
         formData.append("productName", productName);
-        //formData.append("productId", productId);
+        formData.append("productDescription", productDescription);
         formData.append("productPrice", productPrice);
         formData.append("productImage", productImage);
         formData.append("productCategory", productCategory);
@@ -80,18 +80,18 @@ function AddProduct() {
                                                 {errors.productName && <div className="invalid-feedback">{errors.productName}</div>}
                                             </div>
 
-                                            {/* <div className="form-group">
-                                                <label htmlFor="productid">Product Id:</label>
+                                            <div className="form-group">
+                                                <label htmlFor="productDescription">Product Description:</label>
                                                 <input
                                                     type="text"
-                                                    className={`form-control ${errors.productId ? 'is-invalid' : ''}`}
-                                                    id="productid"
-                                                    value={productId}
-                                                    onChange={(e) => setProductId(e.target.value)}
-                                                    placeholder="Enter Product Id"
+                                                    className={`form-control ${errors.productDescription ? 'is-invalid' : ''}`}
+                                                    id="productDescription"
+                                                    value={productDescription}
+                                                    onChange={(e) => setproductDescription(e.target.value)}
+                                                    placeholder="Enter Product Description"
                                                 />
-                                                {errors.productId && <div className="invalid-feedback">{errors.productId}</div>}
-                                            </div> */}
+                                                {errors.productDescription && <div className="invalid-feedback">{errors.productDescription}</div>}
+                                            </div> 
 
                                             <div className="form-group">
                                                 <label htmlFor="productprice">Product Price:</label>
