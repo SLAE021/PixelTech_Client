@@ -39,13 +39,13 @@ function AddProduct() {
         formData.append("productCategory", productCategory);
 
         try {
-            const response = await axios.post("/api/products/new", formData, {
+            const response = await axios.post(`${import.meta.env.VITE_PIXELTECH_SERVER}/api/products/new`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log("Product added:", response.data);
             
             setProductName("");
-            setProductId("");
+            productDescription("");
             setProductPrice("");
             setProductImage(null);
             setProductCategory(""); 
