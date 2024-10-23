@@ -23,10 +23,7 @@ function AuthWrapper(props) {
   const authenticateUser = async () => {
     //esta es una funcion que llamará a la ruta /verify y nos actualiza los estados y se llamará luego de hacer login/logout o volver a la app.
     try {
-      // const authToken = localStorage.getItem("authToken")
-      // const response = await axios.get("http://localhost:5005/api/auth/verify", {
-      // headers: { authorization: `Bearer ${authToken}` }
-      // })
+      
       const response = await service.get("/auth/verify");
 
       console.log(response);
