@@ -38,7 +38,7 @@ function Signup() {
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message)
       } else {
-       
+        //! aqui deberia haber redirección a /error
       }
     }
   };

@@ -68,7 +68,7 @@ function AuthWrapper(props) {
           height: "100vh",
         }}
       >
-        <RiseLoader color="#f5f5f5" />
+        <RiseLoader color="#462ff7" />
       </div>
     );
   }
