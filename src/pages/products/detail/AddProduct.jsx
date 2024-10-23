@@ -22,7 +22,7 @@ function AddProduct() {
         
         let validationErrors = {};
         if (!productName) validationErrors.productName = "Product Name Can't Be Empty";
-        if (!productId) validationErrors.productId = "Product ID Can't Be Empty";
+        //if (!productId) validationErrors.productId = "Product ID Can't Be Empty";
         if (!productPrice) validationErrors.productPrice = "Product Price Can't Be Empty";
         if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
         if (!productCategory) validationErrors.productCategory = "Product Category Can't Be Empty";
@@ -33,13 +33,13 @@ function AddProduct() {
        
         const formData = new FormData();
         formData.append("productName", productName);
-        formData.append("productId", productId);
+        //formData.append("productId", productId);
         formData.append("productPrice", productPrice);
         formData.append("productImage", productImage);
         formData.append("productCategory", productCategory);
 
         try {
-            const response = await axios.post("/api/products/new", formData, {
+            const response = await axios.post("/admin/add-product", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log("Product added:", response.data);
@@ -80,7 +80,7 @@ function AddProduct() {
                                                 {errors.productName && <div className="invalid-feedback">{errors.productName}</div>}
                                             </div>
 
-                                            <div className="form-group">
+                                            {/* <div className="form-group">
                                                 <label htmlFor="productid">Product Id:</label>
                                                 <input
                                                     type="text"
@@ -91,7 +91,7 @@ function AddProduct() {
                                                     placeholder="Enter Product Id"
                                                 />
                                                 {errors.productId && <div className="invalid-feedback">{errors.productId}</div>}
-                                            </div>
+                                            </div> */}
 
                                             <div className="form-group">
                                                 <label htmlFor="productprice">Product Price:</label>

@@ -28,7 +28,7 @@ function ProductAdmin() {
         <div className="container-fluid">
           <a className="navbar-brand">Todos los Productos</a>
           <form className="d-flex">
-            <Link to="/admin/products/new" className="btn btn-dark">
+            <Link to="/admin/add-product" className="btn btn-dark">
               <FontAwesomeIcon icon={["fas", "plus"]} />
               <span className="ms-2">Agregar Productos</span>
             </Link>

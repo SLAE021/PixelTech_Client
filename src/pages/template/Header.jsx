@@ -21,11 +21,11 @@ function Header() {
   const handleLogout = async () => {
 
     try {
-      localStorage.removeItem("authToken") // removemos el token
+      localStorage.removeItem("authToken") 
 
-      await authenticateUser() // validat el token, la funcion cambia los estados
+      await authenticateUser() 
 
-      navigate("/") // navegamos a cualquier página pública
+      navigate("/") 
 
     } catch (error) {
       console.log(error)
