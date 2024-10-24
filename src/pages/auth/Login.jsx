@@ -36,6 +36,7 @@ const Login = () => {
         if (error.response.status === 400) {
           setErrorMessage(error.response.data.message)
         } else {
+          navigate("*")
           //! aqui deberia haber redirección a /error
         }
       }
