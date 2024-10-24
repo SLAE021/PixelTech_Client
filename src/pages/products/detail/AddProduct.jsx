@@ -11,11 +11,11 @@ function AddProduct() {
     const [errors, setErrors] = useState({});
 
 
-    const handleImageChange = (e) => {
+   /*  const handleImageChange = (e) => {
         const file = e.target.files[0];
        
         setProductImage("");
-    };
+    }; */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ function AddProduct() {
 
         try {
             const storedToken = localStorage.getItem("authToken");
-            const response = await service.post("/products", formData, {
+            const response = await service.post("/", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
 
