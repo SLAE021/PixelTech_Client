@@ -36,7 +36,7 @@ function AddProduct() {
         formData.append("name", productName);
         formData.append("description", productDescription);
         formData.append("price", productPrice);
-        formData.append("image", productImage);
+       // formData.append("image", productImage);
         formData.append("category", productCategory);
 
         try {
