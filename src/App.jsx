@@ -10,6 +10,8 @@ import Signup from "./pages/auth/Signup";
 import ProductList from "./pages/products/ProductList";
 import AddProduct from "./pages/products/detail/AddProduct";
 import ProductAdmin from "./pages/adminProducts/ProductAdmin";
+import NotFound from "./pages/NotFound,";
+import Error from "./pages/error";
 
 function App() {
 
