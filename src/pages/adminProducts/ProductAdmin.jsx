@@ -41,7 +41,7 @@ function ProductAdmin() {
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
-            <th>image</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

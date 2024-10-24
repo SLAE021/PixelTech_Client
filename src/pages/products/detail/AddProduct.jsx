@@ -25,7 +25,7 @@ function AddProduct() {
         if (!productName) validationErrors.productName = "Product Name Can't Be Empty";
         if (!productDescription) validationErrors.productDescription = "Product Description Can't Be Empty";
         if (!productPrice) validationErrors.productPrice = "Product Price Can't Be Empty";
-        if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
+        //if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
         if (!productCategory) validationErrors.productCategory = "Product Category Can't Be Empty";
 
         setErrors(validationErrors);
@@ -122,7 +122,7 @@ function AddProduct() {
                                                 {errors.productCategory && <div className="invalid-feedback">{errors.productCategory}</div>}
                                             </div>
 
-                                            <p>Product Image:</p>
+                                        {/*     <p>Product Image:</p>
                                             <div className="custom-file">
                                                 <input
                                                     type="file"
@@ -135,7 +135,7 @@ function AddProduct() {
                                                     {productImage ? productImage.name : "Choose file..."}
                                                 </label>
                                                 {errors.productImage && <div className="invalid-feedback">{errors.productImage}</div>}
-                                            </div>
+                                            </div> */}
 
                                             <button className="btn btn-dark mt-5 mx-auto d-block" type="submit">
                                                 Add Product
