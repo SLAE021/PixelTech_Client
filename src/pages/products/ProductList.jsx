@@ -38,7 +38,7 @@ function FilterMenuLeft() {
           })}
         </div>
       </li>
-      <li className="list-group-item">
+      {/* <li className="list-group-item">
         <h5 className="mt-1 mb-1">Marcas</h5>
         <div className="d-flex flex-column">
           {brands.map((v, i) => {
@@ -67,7 +67,7 @@ function FilterMenuLeft() {
             );
           })}
         </div>
-      </li>
+      </li> */}
       <li className="list-group-item">
         <h5 className="mt-1 mb-2">Rango de Precio</h5>
         <div className="d-grid d-block mb-3">
