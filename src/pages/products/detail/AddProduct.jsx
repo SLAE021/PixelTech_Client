@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../../context/auth.context.jsx"
 
 
 function AddProduct() {
@@ -9,8 +10,14 @@ function AddProduct() {
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState(""); 
     const [errors, setErrors] = useState({});
+  const { authenticateUser } = useContext(AuthContext)
+
 
     
+  useEffect(() => {
+    authenticateUser(); 
+  }, [authenticateUser]);
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         setProductImage(file);
@@ -39,8 +46,9 @@ function AddProduct() {
         formData.append("productCategory", productCategory);
 
         try {
+            const storedToken = localStorage.getItem("authToken");
             const response = await axios.post(`${import.meta.env.VITE_PIXELTECH_SERVER}/api/products`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
             console.log("Product added:", response.data);
             
