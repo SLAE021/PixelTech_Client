@@ -13,7 +13,7 @@ function AddProduct() {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        //setProductImage(file);
+       
         setProductImage("");
     };
 
@@ -44,10 +44,7 @@ function AddProduct() {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
 
-            // const response = await axios.post(`${import.meta.env.VITE_PIXELTECH_SERVER}/api/products`, formData, {
-            //     headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
-            // });
-
+            
             console.log("Product added:", response.data);
 
             setProductName("");
