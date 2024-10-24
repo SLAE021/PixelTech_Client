@@ -7,7 +7,7 @@ import { RiseLoader } from "react-spinners";
 function ProductDetail() {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  L;
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,7 +34,7 @@ function ProductDetail() {
       >
         <RiseLoader color="#462ff7" />
       </div>
-    );
+    )
   }
 
   return (
