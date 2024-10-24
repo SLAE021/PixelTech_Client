@@ -7,7 +7,7 @@ function AddProduct() {
     const [productName, setProductName] = useState("");
     const [productDescription, setproductDescription] = useState("");
     const [productPrice, setProductPrice] = useState("");
-    const [productImage, setProductImage] = useState(null);
+    //const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState(""); 
     const [errors, setErrors] = useState({});
 
@@ -41,10 +41,10 @@ function AddProduct() {
 
         try {
             const storedToken = localStorage.getItem("authToken");
-            const response = await service.post("/product", formData, {
+            const response = await service.post("/products", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
-
+console.log("aqui se agrego", storedToken)
             /* const response = await axios.post("/products", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
