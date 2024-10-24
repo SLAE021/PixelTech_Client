@@ -45,7 +45,7 @@ function AddProduct() {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             }); */
 
-            const response = await axios.post("/product", formData, {
+            const response = await axios.post("/products", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
             console.log("Product added:", response.data);
