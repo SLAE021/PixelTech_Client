@@ -40,7 +40,7 @@ function AddProduct() {
 
         try {
             const storedToken = localStorage.getItem("authToken");
-            const response = await service.post("/api/products", formData, {
+            const response = await service.post("/product", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
 
