@@ -1,6 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { AuthContext } from "../../context/auth.context.jsx"
+import service from "../../../services/config";
 
 
 function AddProduct() {
@@ -10,50 +9,49 @@ function AddProduct() {
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState(""); 
     const [errors, setErrors] = useState({});
-  const { authenticateUser } = useContext(AuthContext)
 
-
-    
-  useEffect(() => {
-    authenticateUser(); 
-  }, [authenticateUser]);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setProductImage(file);
+        //setProductImage(file);
+        setProductImage("");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        
+
         let validationErrors = {};
         if (!productName) validationErrors.productName = "Product Name Can't Be Empty";
         if (!productDescription) validationErrors.productDescription = "Product Description Can't Be Empty";
         if (!productPrice) validationErrors.productPrice = "Product Price Can't Be Empty";
-        if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
+        //if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
         if (!productCategory) validationErrors.productCategory = "Product Category Can't Be Empty";
 
         setErrors(validationErrors);
         if (Object.keys(validationErrors).length > 0) return;
 
-       
         const formData = new FormData();
-        formData.append("productName", productName);
-        formData.append("productDescription", productDescription);
-        formData.append("productPrice", productPrice);
-        formData.append("productImage", productImage);
-        formData.append("productCategory", productCategory);
+        formData.append("name", productName);
+        formData.append("description", productDescription);
+        formData.append("price", productPrice);
+        formData.append("image", productImage);
+        formData.append("category", productCategory);
 
         try {
             const storedToken = localStorage.getItem("authToken");
-            const response = await axios.post(`${import.meta.env.VITE_PIXELTECH_SERVER}/api/products`, formData, {
+            const response = await service.post("/products", formData, {
                 headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
             });
+
+            // const response = await axios.post(`${import.meta.env.VITE_PIXELTECH_SERVER}/api/products`, formData, {
+            //     headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
+            // });
+
             console.log("Product added:", response.data);
-            
+
             setProductName("");
-            productDescription("");
+            setproductDescription("");
             setProductPrice("");
             setProductImage(null);
             setProductCategory(""); 
