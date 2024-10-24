@@ -25,7 +25,7 @@ function AddProduct() {
         if (!productName) validationErrors.productName = "Product Name Can't Be Empty";
         if (!productDescription) validationErrors.productDescription = "Product Description Can't Be Empty";
         if (!productPrice) validationErrors.productPrice = "Product Price Can't Be Empty";
-        //if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
+        if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
         if (!productCategory) validationErrors.productCategory = "Product Category Can't Be Empty";
 
         setErrors(validationErrors);
