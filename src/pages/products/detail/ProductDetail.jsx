@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
 import service from "../../../services/config";
+import { RiseLoader } from "react-spinners";
 
 
 function ProductDetail() {
@@ -24,7 +25,18 @@ function ProductDetail() {
 
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <RiseLoader color="#462ff7" />
+      </div>
+    );
   }
 
   return (
