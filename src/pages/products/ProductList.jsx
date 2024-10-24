@@ -39,7 +39,7 @@ function FilterMenuLeft() {
         </div>
       </li>
       <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Brands</h5>
+        <h5 className="mt-1 mb-1">Marcas</h5>
         <div className="d-flex flex-column">
           {brands.map((v, i) => {
             return (
@@ -54,7 +54,7 @@ function FilterMenuLeft() {
         </div>
       </li>
       <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Manufacturers</h5>
+        <h5 className="mt-1 mb-1">Fabricantes</h5>
         <div className="d-flex flex-column">
           {manufacturers.map((v, i) => {
             return (
@@ -69,7 +69,7 @@ function FilterMenuLeft() {
         </div>
       </li>
       <li className="list-group-item">
-        <h5 className="mt-1 mb-2">Price Range</h5>
+        <h5 className="mt-1 mb-2">Rango de Precio</h5>
         <div className="d-grid d-block mb-3">
           <div className="form-floating mb-2">
             <input
@@ -78,7 +78,7 @@ function FilterMenuLeft() {
               placeholder="Min"
               defaultValue="100000"
             />
-            <label htmlFor="floatingInput">Min Price</label>
+            <label htmlFor="floatingInput">Menor Precio</label>
           </div>
           <div className="form-floating mb-2">
             <input
@@ -87,9 +87,9 @@ function FilterMenuLeft() {
               placeholder="Max"
               defaultValue="500000"
             />
-            <label htmlFor="floatingInput">Max Price</label>
+            <label htmlFor="floatingInput">Maximo Pricio</label>
           </div>
-          <button className="btn btn-dark">Apply</button>
+          <button className="btn btn-dark">Aplicar</button>
         </div>
       </li>
     </ul>
@@ -116,7 +116,7 @@ function ProductList() {
               to="/products"
               replace
             >
-              All Prodcuts
+              Todos los Productos
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
@@ -156,7 +156,7 @@ function ProductList() {
                   aria-expanded="false"
                   aria-controls="collapseFilter"
                 >
-                  Filter Products
+                  Filtrar Productos
                 </button>
               </h2>
             </div>
@@ -188,7 +188,7 @@ function ProductList() {
                   aria-label="Default select example"
                   defaultValue=""
                 >
-                  <option value="">All Models</option>
+                  <option value="">Todos los Modelos</option>
                   <option value="1">iPhone X</option>
                   <option value="2">iPhone Xs</option>
                   <option value="3">iPhone 11</option>
@@ -235,13 +235,13 @@ function ProductList() {
             </div>
             <div className="d-flex align-items-center mt-auto">
               <span className="text-muted small d-none d-md-inline">
-                Showing 10 of 100
+                Mostrando 10 de 100
               </span>
               <nav aria-label="Page navigation example" className="ms-auto">
                 <ul className="pagination my-0">
                   <li className="page-item">
                     <a className="page-link" href="!#">
-                      Previous
+                      Atras
                     </a>
                   </li>
                   <li className="page-item">
@@ -261,7 +261,7 @@ function ProductList() {
                   </li>
                   <li className="page-item">
                     <a className="page-link" href="!#">
-                      Next
+                      Siguiente
                     </a>
                   </li>
                 </ul>

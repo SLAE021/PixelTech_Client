@@ -13,7 +13,7 @@ function ProductH(props) {
         className="badge bg-dim py-2 text-white position-absolute"
         style={{ top: "0.5rem", left: "0.5rem" }}
       >
-        {props.percentOff}% OFF
+        {props.percentOff}% Descuento
       </div>
     );
 
@@ -41,14 +41,14 @@ function ProductH(props) {
             <div className="card-body h-100">
               <div className="d-flex flex-column h-100">
                 <h5 className="card-title text-dark text-truncate mb-1">
-                  Nillkin iPhone X cover
+                  Muestra
                 </h5>
                 <span className="card-text text-muted mb-2 flex-shrink-0">
                   {offPrice}
                 </span>
                 <div className="mt-auto d-flex">
                   <button className="btn btn-outline-dark ms-auto">
-                    <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Add to cart
+                    <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Agragar al Carrito
                   </button>
                 </div>
               </div>

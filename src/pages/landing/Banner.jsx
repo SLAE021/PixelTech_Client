@@ -31,7 +31,7 @@ function BannerImage(props) {
         />
       </div>
       <div className="carousel-caption d-none d-lg-block">
-        <h5>Banner Header</h5>
+        <h5>PixelTech</h5>
         <p>Aqui va la descripcion de la pagina</p>
       </div>
     </div>

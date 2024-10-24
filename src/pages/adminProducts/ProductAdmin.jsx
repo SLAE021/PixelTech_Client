@@ -38,9 +38,9 @@ function ProductAdmin() {
       <table className="table table-striped table-hover">
         <thead className="table-dark">
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
+            <th>Nombre</th>
+            <th>Categoria</th>
+            <th>Precio</th>
             <th></th>
           </tr>
         </thead>

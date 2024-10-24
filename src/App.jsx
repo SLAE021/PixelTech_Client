@@ -23,6 +23,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/admin/products" element={<ProductAdmin />} />
           <Route path="/admin/add-product" element={<AddProduct />} />
+          <Route path={"/error"} element={<Error/>}/>
+          <Route path={"*"} element={<NotFound/>}/>
         </Routes>
       </Template>
   );

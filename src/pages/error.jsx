@@ -6,7 +6,7 @@ function Error() {
         
         <h2> Lo sentimos ocurrio un problema en la pagina</h2>
 
-        <p>a ocurrido un error regresa a home </p>
+        <p>a ocurrido un error regresa al inicio </p>
     </div>
   )
 }

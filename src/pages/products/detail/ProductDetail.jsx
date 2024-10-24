@@ -46,7 +46,7 @@ function ProductDetail() {
         <ol className="breadcrumb p-3">
           <li className="breadcrumb-item">
             <Link className="text-decoration-none link-secondary" to="/products">
-              All Products
+              Todos los Productos
             </Link>
           </li>
           <li className="breadcrumb-item">
@@ -105,24 +105,24 @@ function ProductDetail() {
             <div className="row g-3 mb-4">
               <div className="col">
                 <button className="btn btn-outline-dark py-2 w-100">
-                  Add to cart
+                  Agregar al Carrito
                 </button>
               </div>
               <div className="col">
-                <button className="btn btn-dark py-2 w-100">Buy now</button>
+                <button className="btn btn-dark py-2 w-100">Comprar</button>
               </div>
             </div>
 
-            <h4 className="mb-0">Details</h4>
+            <h4 className="mb-0">Detalles</h4>
             <hr />
             <dl className="row">
 
-              <dt className="col-sm-4">Category</dt>
+              <dt className="col-sm-4">Categoria</dt>
               <dd className="col-sm-8 mb-3">{product.category}</dd>
 
             </dl>
 
-            <h4 className="mb-0">Description</h4>
+            <h4 className="mb-0">Descripcion</h4>
             <hr />
             <p className="lead flex-shrink-0">
               <small>{product.description}</small>

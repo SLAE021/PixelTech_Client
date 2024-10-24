@@ -72,63 +72,63 @@ console.log("aqui se agrego", storedToken)
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-title text-center mt-3">
-                                        <h3>Add Product</h3>
+                                        <h3>Agregar producto</h3>
                                     </div>
                                     <div className="card-body">
                                         <form onSubmit={handleSubmit}>
                                             <div className="form-group">
-                                                <label htmlFor="productname">Product Name:</label>
+                                                <label htmlFor="productname">Nombre del producto:</label>
                                                 <input
                                                     type="text"
                                                     className={`form-control ${errors.productName ? 'is-invalid' : ''}`}
                                                     id="productname"
                                                     value={productName}
                                                     onChange={(e) => setProductName(e.target.value)}
-                                                    placeholder="Enter Product Name"
+                                                    placeholder="Nombre del producto"
                                                 />
                                                 {errors.productName && <div className="invalid-feedback">{errors.productName}</div>}
                                             </div>
 
                                             <div className="form-group">
-                                                <label htmlFor="productDescription">Product Description:</label>
+                                                <label htmlFor="productDescription">Descripción:</label>
                                                 <input
                                                     type="text"
                                                     className={`form-control ${errors.productDescription ? 'is-invalid' : ''}`}
                                                     id="productDescription"
                                                     value={productDescription}
                                                     onChange={(e) => setproductDescription(e.target.value)}
-                                                    placeholder="Enter Product Description"
+                                                    placeholder="Descripcion del producto"
                                                 />
                                                 {errors.productDescription && <div className="invalid-feedback">{errors.productDescription}</div>}
                                             </div> 
 
                                             <div className="form-group">
-                                                <label htmlFor="productprice">Product Price:</label>
+                                                <label htmlFor="productprice">Precio del producto:</label>
                                                 <input
                                                     type="text"
                                                     className={`form-control ${errors.productPrice ? 'is-invalid' : ''}`}
                                                     id="productprice"
                                                     value={productPrice}
                                                     onChange={(e) => setProductPrice(e.target.value)}
-                                                    placeholder="Enter Product Price"
+                                                    placeholder="Introduce Precio"
                                                 />
                                                 {errors.productPrice && <div className="invalid-feedback">{errors.productPrice}</div>}
                                             </div>
 
                                             <div className="form-group">
-                                                <label htmlFor="productcategory">Product Category:</label>
+                                                <label htmlFor="productcategory">Categoria:</label>
                                                 <input
                                                     type="text"
                                                     className={`form-control ${errors.productCategory ? 'is-invalid' : ''}`}
                                                     id="productcategory"
                                                     value={productCategory}
                                                     onChange={(e) => setProductCategory(e.target.value)}
-                                                    placeholder="Enter Product Category"
+                                                    placeholder="Introduce Categoria"
                                                 />
                                                 {errors.productCategory && <div className="invalid-feedback">{errors.productCategory}</div>}
                                             </div>
 
-                                        {/*     <p>Product Image:</p>
+                                            {/* <p>Imagen del producto:</p>
                                             <div className="custom-file">
                                                 <input
                                                     type="file"
@@ -138,13 +138,13 @@ console.log("aqui se agrego", storedToken)
                                                     required
                                                 />
                                                 <label className="custom-file-label" htmlFor="productimage">
-                                                    {productImage ? productImage.name : "Choose file..."}
+                                                    {productImage ? productImage.name : "Selecione archivo.."}
                                                 </label>
                                                 {errors.productImage && <div className="invalid-feedback">{errors.productImage}</div>}
                                             </div> */}
 
                                             <button className="btn btn-dark mt-5 mx-auto d-block" type="submit">
-                                                Add Product
+                                                Agregar Producto
                                             </button>
                                         </form>
                                     </div>
