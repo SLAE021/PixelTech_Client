@@ -1,32 +1,27 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Ratings from "react-ratings-declarative";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
-import RelatedProduct from "./RelatedProduct";
+import service from "../../../services/config";
 
-const iconPath =
-  "M18.571 7.221c0 0.201-0.145 0.391-0.29 0.536l-4.051 3.951 0.96 5.58c0.011 0.078 0.011 0.145 0.011 0.223 0 0.29-0.134 0.558-0.458 0.558-0.156 0-0.313-0.056-0.446-0.134l-5.011-2.634-5.011 2.634c-0.145 0.078-0.29 0.134-0.446 0.134-0.324 0-0.469-0.268-0.469-0.558 0-0.078 0.011-0.145 0.022-0.223l0.96-5.58-4.063-3.951c-0.134-0.145-0.279-0.335-0.279-0.536 0-0.335 0.346-0.469 0.625-0.513l5.603-0.815 2.511-5.078c0.1-0.212 0.29-0.458 0.547-0.458s0.446 0.246 0.547 0.458l2.511 5.078 5.603 0.815c0.268 0.045 0.625 0.179 0.625 0.513z";
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
   const { id } = useParams(); // Obtén el id del producto desde la URL
-
+ 
   // Carga de datos del producto desde la API
   useEffect(() => {
-    axios.get(`/api/products/${id}`)
-      .then(response => {
+    const fetchProducts = async () => {
+      try {
+        const response = await service.get(`/products/${id}`);
         setProduct(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching product data:", error);
-      });
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
   }, [id]);
 
-  // Función para cambiar la calificación
-  function changeRating(newRating) {
-    // Aquí puedes manejar la lógica para cambiar la calificación
-  }
 
   if (!product) {
     return <div>Loading...</div>;
@@ -56,7 +51,7 @@ function ProductDetail() {
         <div className="d-none d-lg-block col-lg-1">
           <div className="image-vertical-scroller">
             <div className="d-flex flex-column">
-              {product.images.map((image, i) => {
+              {/* {product.images.map((image, i) => {
                 let selected = i !== 1 ? "opacity-6" : "";
                 return (
                   <a key={i} href="!#">
@@ -67,7 +62,14 @@ function ProductDetail() {
                     />
                   </a>
                 );
-              })}
+              })} */}
+              <a key="1" href="!#">
+                    <img
+                      className={"rounded mb-2 ratio opacity-6"}
+                      alt=""
+                      src=""
+                    />
+                  </a>
             </div>
           </div>
         </div>
@@ -77,7 +79,7 @@ function ProductDetail() {
               <img
                 className="border rounded ratio ratio-1x1"
                 alt=""
-                src={product.mainImage}
+                src={product.image}
               />
             </div>
           </div>
@@ -102,45 +104,10 @@ function ProductDetail() {
             <h4 className="mb-0">Details</h4>
             <hr />
             <dl className="row">
-              <dt className="col-sm-4">Code</dt>
-              <dd className="col-sm-8 mb-3">{product.code}</dd>
 
               <dt className="col-sm-4">Category</dt>
               <dd className="col-sm-8 mb-3">{product.category}</dd>
 
-              <dt className="col-sm-4">Brand</dt>
-              <dd className="col-sm-8 mb-3">{product.brand}</dd>
-
-              <dt className="col-sm-4">Manufacturer</dt>
-              <dd className="col-sm-8 mb-3">{product.manufacturer}</dd>
-
-              <dt className="col-sm-4">Color</dt>
-              <dd className="col-sm-8 mb-3">{product.colors.join(", ")}</dd>
-
-              <dt className="col-sm-4">Status</dt>
-              <dd className="col-sm-8 mb-3">{product.status}</dd>
-
-              <dt className="col-sm-4">Rating</dt>
-              <dd className="col-sm-8 mb-3">
-                <Ratings
-                  rating={product.rating}
-                  widgetRatedColors="rgb(253, 204, 13)"
-                  changeRating={changeRating}
-                  widgetSpacings="2px"
-                >
-                  {Array.from({ length: 5 }, (_, i) => {
-                    return (
-                      <Ratings.Widget
-                        key={i}
-                        widgetDimension="20px"
-                        svgIconViewBox="0 0 19 20"
-                        svgIconPath={iconPath}
-                        widgetHoverColor="rgb(253, 204, 13)"
-                      />
-                    );
-                  })}
-                </Ratings>
-              </dd>
             </dl>
 
             <h4 className="mb-0">Description</h4>
