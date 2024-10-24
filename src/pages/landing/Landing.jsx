@@ -56,7 +56,7 @@ function Landing() {
                   </p>
                   <div className="d-grid gap-2">
                     <Link
-                      to="/products/1"
+                      to={`/products/${product.id}`}
                       className="btn btn-outline-dark"
                       replace
                     >
