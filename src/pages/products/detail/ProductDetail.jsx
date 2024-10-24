@@ -4,12 +4,11 @@ import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
 import service from "../../../services/config";
 import { RiseLoader } from "react-spinners";
 
-
 function ProductDetail() {
   const [product, setProduct] = useState(null);
-  const { id } = useParams(); // Obtén el id del producto desde la URL
- 
-  // Carga de datos del producto desde la API
+  const { id } = useParams();
+  L;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -22,7 +21,6 @@ function ProductDetail() {
 
     fetchProducts();
   }, [id]);
-
 
   if (!product) {
     return (
@@ -41,11 +39,14 @@ function ProductDetail() {
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
-      <ScrollToTopOnMount/>
+      <ScrollToTopOnMount />
       <nav aria-label="breadcrumb" className="bg-custom-light rounded mb-4">
         <ol className="breadcrumb p-3">
           <li className="breadcrumb-item">
-            <Link className="text-decoration-none link-secondary" to="/products">
+            <Link
+              className="text-decoration-none link-secondary"
+              to="/products"
+            >
               Todos los Productos
             </Link>
           </li>
@@ -76,12 +77,8 @@ function ProductDetail() {
                 );
               })} */}
               <a key="1" href="!#">
-                    <img
-                      className={"rounded mb-2 ratio opacity-6"}
-                      alt=""
-                      src=""
-                    />
-                  </a>
+                <img className={"rounded mb-2 ratio opacity-6"} alt="" src="" />
+              </a>
             </div>
           </div>
         </div>
@@ -116,10 +113,8 @@ function ProductDetail() {
             <h4 className="mb-0">Detalles</h4>
             <hr />
             <dl className="row">
-
               <dt className="col-sm-4">Categoria</dt>
               <dd className="col-sm-8 mb-3">{product.category}</dd>
-
             </dl>
 
             <h4 className="mb-0">Descripcion</h4>

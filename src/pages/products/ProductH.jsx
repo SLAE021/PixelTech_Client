@@ -48,7 +48,8 @@ function ProductH(props) {
                 </span>
                 <div className="mt-auto d-flex">
                   <button className="btn btn-outline-dark ms-auto">
-                    <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Agragar al Carrito
+                    <FontAwesomeIcon icon={["fas", "cart-plus"]} /> Agragar al
+                    Carrito
                   </button>
                 </div>
               </div>

@@ -2,7 +2,6 @@ import Image from "../../assets/nillkin-case-1.jpg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 function Product(props) {
   const price = 10000;
   let percentOff;

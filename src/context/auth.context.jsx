@@ -23,7 +23,6 @@ function AuthWrapper(props) {
   const authenticateUser = async () => {
     //esta es una funcion que llamará a la ruta /verify y nos actualiza los estados y se llamará luego de hacer login/logout o volver a la app.
     try {
-      
       const response = await service.get("/auth/verify");
 
       console.log(response);
@@ -70,7 +69,6 @@ function AuthWrapper(props) {
     );
   }
 
-  
   return (
     <AuthContext.Provider value={passedContext}>
       {props.children}

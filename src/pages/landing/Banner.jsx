@@ -38,7 +38,6 @@ function BannerImage(props) {
   );
 }
 
-
 function Banner() {
   return (
     <div

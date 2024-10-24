@@ -6,11 +6,11 @@ function NotFound() {
   return (
     <div>
       
-      <h2>Seems you are lost</h2>
+      <h2>Te has perdido</h2>
 
       <img/>
 
-      <h5>Click on the Logo to go back home</h5>
+      <h5>Click en el Logo para volver a home</h5>
 
       <Link to={"/"}>
         <img src="./src/assets/notfound.jpg"/>

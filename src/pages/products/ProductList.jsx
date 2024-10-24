@@ -22,7 +22,7 @@ function FilterMenuLeft() {
   return (
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
-        <h5 className="mt-1 mb-2">Browse</h5>
+        <h5 className="mt-1 mb-2">Categorias</h5>
         <div className="d-flex flex-wrap my-2">
           {categories.map((v, i) => {
             return (
