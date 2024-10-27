@@ -7,12 +7,10 @@ import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 
 // Constantes
 const categories = [
-  "All Products",
-  "Phones & Tablets",
-  "Cases & Covers",
-  "Screen Guards",
-  "Cables & Chargers",
-  "Power Banks",
+  "informatica",
+  "calzado",
+  "computacion",
+  
 ];
 
 // Componente de Filtro Lateral
