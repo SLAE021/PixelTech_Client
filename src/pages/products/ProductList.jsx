@@ -10,16 +10,16 @@ function FilterMenuLeft({ onFilterChange }) {
   return (
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
-        <h5 className="mt-1 mb-2">Categorías</h5>
+        <h5 className="mt-1 mb-2">Categorias</h5>
         <div className="d-flex flex-wrap my-2">
-          {["", "informatica", "calzado", "computacion"].map((category, i) => (
+          {["informatica", "calzado", "computacion"].map((category, i) => (
             <Link
               key={i}
               to="#"
               onClick={() => onFilterChange({ category })}
               className="btn btn-sm btn-outline-dark rounded-pill me-2 mb-2"
             >
-              {category === "" ? "Todos" : category}
+              {category}
             </Link>
           ))}
         </div>
@@ -31,7 +31,7 @@ function FilterMenuLeft({ onFilterChange }) {
 // Componente Principal de Lista de Productos
 function ProductList() {
   const [viewType, setViewType] = useState({ grid: true });
-  const [filters, setFilters] = useState({ category: "" });
+  const [filters, setFilters] = useState({ category: "All Products" });
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function ProductList() {
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            {filters.category || "Todos"}
+            {filters.category}
           </li>
         </ol>
       </nav>
@@ -70,14 +70,14 @@ function ProductList() {
       {/* Filtros para Móviles */}
       <div className="h-scroller d-block d-lg-none">
         <nav className="nav h-underline">
-          {["", "informatica", "calzado", "computacion"].map((category, i) => (
+          {["informatica", "calzado", "computacion"].map((category, i) => (
             <div key={i} className="h-link me-2">
               <Link
                 to="#"
                 onClick={() => handleFilterChange({ category })}
                 className="btn btn-sm btn-outline-dark rounded-pill"
               >
-                {category === "" ? "Todos" : category}
+                {category}
               </Link>
             </div>
           ))}
@@ -150,10 +150,9 @@ function ProductList() {
 // Función para obtener productos solo por categoría
 async function fetchProducts(filters) {
   try {
-    let url = "https://pixeltech-server.onrender.com/api/products";
-    if (filters.category) {
-      url += `?category=${encodeURIComponent(filters.category)}`;
-    }
+    const url = `https://pixeltech-server.onrender.com/api/products?category=${encodeURIComponent(
+      filters.category
+    )}`;
 
     const response = await fetch(url);
 
