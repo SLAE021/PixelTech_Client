@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import Product from "./Product";
 import ProductH from "./ProductH";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 
+// Constantes
 const categories = [
   "All Products",
   "Phones & Tablets",
@@ -14,192 +15,145 @@ const categories = [
   "Power Banks",
 ];
 
-const brands = ["Apple", "Samsung", "Google", "HTC"];
+// Componente de Filtro Lateral
+function FilterMenuLeft({ onFilterChange }) {
+  const [priceRange, setPriceRange] = useState({ min: 100000, max: 500000 });
 
-const manufacturers = ["HOCO", "Nillkin", "Remax", "Baseus"];
+  // Maneja el cambio de rango de precios
+  const handlePriceChange = (field, value) => {
+    setPriceRange({ ...priceRange, [field]: Number(value) });
+  };
 
-function FilterMenuLeft() {
+  const applyFilters = () => {
+    onFilterChange({ priceRange });
+  };
+
   return (
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
         <h5 className="mt-1 mb-2">Categorias</h5>
         <div className="d-flex flex-wrap my-2">
-          {categories.map((v, i) => {
-            return (
-              <Link
-                key={i}
-                to="/products"
-                className="btn btn-sm btn-outline-dark rounded-pill me-2 mb-2"
-                replace
-              >
-                {v}
-              </Link>
-            );
-          })}
+          {categories.map((category, i) => (
+            <Link
+              key={i}
+              to="#"
+              onClick={() => onFilterChange({ category })}
+              className="btn btn-sm btn-outline-dark rounded-pill me-2 mb-2"
+            >
+              {category}
+            </Link>
+          ))}
         </div>
       </li>
-      {/* <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Marcas</h5>
-        <div className="d-flex flex-column">
-          {brands.map((v, i) => {
-            return (
-              <div key={i} className="form-check">
-                <input className="form-check-input" type="checkbox" />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                  {v}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-      </li>
-      <li className="list-group-item">
-        <h5 className="mt-1 mb-1">Fabricantes</h5>
-        <div className="d-flex flex-column">
-          {manufacturers.map((v, i) => {
-            return (
-              <div key={i} className="form-check">
-                <input className="form-check-input" type="checkbox" />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                  {v}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-      </li> */}
+
       <li className="list-group-item">
         <h5 className="mt-1 mb-2">Rango de Precio</h5>
         <div className="d-grid d-block mb-3">
           <div className="form-floating mb-2">
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Min"
-              defaultValue="100000"
+              value={priceRange.min}
+              onChange={(e) => handlePriceChange("min", e.target.value)}
             />
-            <label htmlFor="floatingInput">Menor Precio</label>
+            <label>Menor Precio</label>
           </div>
           <div className="form-floating mb-2">
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Max"
-              defaultValue="500000"
+              value={priceRange.max}
+              onChange={(e) => handlePriceChange("max", e.target.value)}
             />
-            <label htmlFor="floatingInput">Maximo Pricio</label>
+            <label>Maximo Precio</label>
           </div>
-          <button className="btn btn-dark">Aplicar</button>
+          <button className="btn btn-dark" onClick={applyFilters}>
+            Aplicar
+          </button>
         </div>
       </li>
     </ul>
   );
 }
 
+// Componente Principal de Lista de Productos
 function ProductList() {
   const [viewType, setViewType] = useState({ grid: true });
+  const [filters, setFilters] = useState({
+    category: "All Products",
+    priceRange: { min: 100000, max: 500000 },
+  });
+  const [products, setProducts] = useState([]);
 
-  function changeViewType() {
-    setViewType({
-      grid: !viewType.grid,
-    });
-  }
+  useEffect(() => {
+    fetchProducts(filters).then((data) => setProducts(data));
+  }, [filters]);
+
+  const changeViewType = () => {
+    setViewType({ grid: !viewType.grid });
+  };
+
+  const handleFilterChange = (newFilters) => {
+    setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
+  };
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
       <ScrollToTopOnMount />
+
+      {/* Categorías - Breadcrumb */}
       <nav aria-label="breadcrumb" className="bg-custom-light rounded">
         <ol className="breadcrumb p-3 mb-0">
           <li className="breadcrumb-item">
             <Link
               className="text-decoration-none link-secondary"
               to="/products"
-              replace
             >
               Todos los Productos
             </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Cases &amp; Covers
+            {filters.category}
           </li>
         </ol>
       </nav>
 
+      {/* Filtros para Móviles */}
       <div className="h-scroller d-block d-lg-none">
         <nav className="nav h-underline">
-          {categories.map((v, i) => {
-            return (
-              <div key={i} className="h-link me-2">
-                <Link
-                  to="/products"
-                  className="btn btn-sm btn-outline-dark rounded-pill"
-                  replace
-                >
-                  {v}
-                </Link>
-              </div>
-            );
-          })}
+          {categories.map((category, i) => (
+            <div key={i} className="h-link me-2">
+              <Link
+                to="#"
+                onClick={() => handleFilterChange({ category })}
+                className="btn btn-sm btn-outline-dark rounded-pill"
+              >
+                {category}
+              </Link>
+            </div>
+          ))}
         </nav>
       </div>
 
-      <div className="row mb-3 d-block d-lg-none">
-        <div className="col-12">
-          <div id="accordionFilter" className="accordion shadow-sm">
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingOne">
-                <button
-                  className="accordion-button fw-bold collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFilter"
-                  aria-expanded="false"
-                  aria-controls="collapseFilter"
-                >
-                  Filtrar Productos
-                </button>
-              </h2>
-            </div>
-            <div
-              id="collapseFilter"
-              className="accordion-collapse collapse"
-              data-bs-parent="#accordionFilter"
-            >
-              <div className="accordion-body p-0">
-                <FilterMenuLeft />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {/* Vista de Productos */}
       <div className="row mb-4 mt-lg-3">
         <div className="d-none d-lg-block col-lg-3">
           <div className="border rounded shadow-sm">
-            <FilterMenuLeft />
+            <FilterMenuLeft onFilterChange={handleFilterChange} />
           </div>
         </div>
         <div className="col-lg-9">
           <div className="d-flex flex-column h-100">
+            {/* Opciones de Visualización y Búsqueda */}
             <div className="row mb-3">
-              <div className="col-lg-3 d-none d-lg-block">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  defaultValue=""
-                >
-                  <option value="">Todos los Modelos</option>
-                  <option value="1">iPhone X</option>
-                  <option value="2">iPhone Xs</option>
-                  <option value="3">iPhone 11</option>
-                </select>
-              </div>
               <div className="col-lg-9 col-xl-5 offset-xl-4 d-flex flex-row">
                 <div className="input-group">
                   <input
                     className="form-control"
                     type="text"
-                    placeholder="Search products..."
+                    placeholder="Buscar productos..."
                     aria-label="search input"
                   />
                   <button className="btn btn-outline-dark">
@@ -216,62 +170,54 @@ function ProductList() {
                 </button>
               </div>
             </div>
+
+            {/* Productos Filtrados */}
             <div
-              className={
-                "row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4 flex-shrink-0 " +
-                (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
-              }
+              className={`row g-3 mb-4 flex-shrink-0 ${
+                viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2"
+              }`}
             >
-              {Array.from({ length: 10 }, (_, i) => {
-                if (viewType.grid) {
-                  return (
-                    <Product key={i} percentOff={i % 2 === 0 ? 15 : null} />
-                  );
-                }
-                return (
-                  <ProductH key={i} percentOff={i % 4 === 0 ? 15 : null} />
-                );
-              })}
-            </div>
-            <div className="d-flex align-items-center mt-auto">
-              <span className="text-muted small d-none d-md-inline">
-                Mostrando 10 de 100
-              </span>
-              <nav aria-label="Page navigation example" className="ms-auto">
-                <ul className="pagination my-0">
-                  <li className="page-item">
-                    <a className="page-link" href="!#">
-                      Atras
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="!#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="!#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="!#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="!#">
-                      Siguiente
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              {products.map((product, i) =>
+                viewType.grid ? (
+                  <Product
+                    key={i}
+                    product={product}
+                    percentOff={i % 2 === 0 ? 15 : null}
+                  />
+                ) : (
+                  <ProductH
+                    key={i}
+                    product={product}
+                    percentOff={i % 4 === 0 ? 15 : null}
+                  />
+                )
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+async function fetchProducts(filters) {
+  try {
+    const url = `https://pixeltech-server.onrender.com/api/products?category=${encodeURIComponent(
+      filters.category
+    )}&minPrice=${filters.priceRange.min}&maxPrice=${filters.priceRange.max}`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error al obtener los productos:", error);
+    return [];
+  }
 }
 
 export default ProductList;
