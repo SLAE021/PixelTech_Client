@@ -1,37 +1,18 @@
 import { Link } from "react-router-dom";
 import Product from "./Product";
-import ProductH from "./ProductH";
+import ProductH from "./Product";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 
-// Constantes
-const categories = [
-  "informatica",
-  "calzado",
-  "computacion",
-  
-];
-
 // Componente de Filtro Lateral
 function FilterMenuLeft({ onFilterChange }) {
-  const [priceRange, setPriceRange] = useState({ min: 100000, max: 500000 });
-
-  // Maneja el cambio de rango de precios
-  const handlePriceChange = (field, value) => {
-    setPriceRange({ ...priceRange, [field]: Number(value) });
-  };
-
-  const applyFilters = () => {
-    onFilterChange({ priceRange });
-  };
-
   return (
     <ul className="list-group list-group-flush rounded">
       <li className="list-group-item d-none d-lg-block">
         <h5 className="mt-1 mb-2">Categorias</h5>
         <div className="d-flex flex-wrap my-2">
-          {categories.map((category, i) => (
+          {["informatica", "calzado", "computacion"].map((category, i) => (
             <Link
               key={i}
               to="#"
@@ -43,35 +24,6 @@ function FilterMenuLeft({ onFilterChange }) {
           ))}
         </div>
       </li>
-
-      <li className="list-group-item">
-        <h5 className="mt-1 mb-2">Rango de Precio</h5>
-        <div className="d-grid d-block mb-3">
-          <div className="form-floating mb-2">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Min"
-              value={priceRange.min}
-              onChange={(e) => handlePriceChange("min", e.target.value)}
-            />
-            <label>Menor Precio</label>
-          </div>
-          <div className="form-floating mb-2">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Max"
-              value={priceRange.max}
-              onChange={(e) => handlePriceChange("max", e.target.value)}
-            />
-            <label>Maximo Precio</label>
-          </div>
-          <button className="btn btn-dark" onClick={applyFilters}>
-            Aplicar
-          </button>
-        </div>
-      </li>
     </ul>
   );
 }
@@ -79,10 +31,7 @@ function FilterMenuLeft({ onFilterChange }) {
 // Componente Principal de Lista de Productos
 function ProductList() {
   const [viewType, setViewType] = useState({ grid: true });
-  const [filters, setFilters] = useState({
-    category: "All Products",
-    priceRange: { min: 100000, max: 500000 },
-  });
+  const [filters, setFilters] = useState({ category: "All Products" });
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -121,7 +70,7 @@ function ProductList() {
       {/* Filtros para Móviles */}
       <div className="h-scroller d-block d-lg-none">
         <nav className="nav h-underline">
-          {categories.map((category, i) => (
+          {["informatica", "calzado", "computacion"].map((category, i) => (
             <div key={i} className="h-link me-2">
               <Link
                 to="#"
@@ -198,11 +147,12 @@ function ProductList() {
   );
 }
 
+// Función para obtener productos solo por categoría
 async function fetchProducts(filters) {
   try {
     const url = `https://pixeltech-server.onrender.com/api/products?category=${encodeURIComponent(
       filters.category
-    )}&minPrice=${filters.priceRange.min}&maxPrice=${filters.priceRange.max}`;
+    )}`;
 
     const response = await fetch(url);
 
