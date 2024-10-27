@@ -11,7 +11,7 @@ import ProductList from "./pages/products/ProductList";
 import AddProduct from "./pages/adminProducts/AddProduct";
 import ProductAdmin from "./pages/adminProducts/ProductAdmin";
 import NotFound from "./pages/NotFound,";
-import Error from "./pages/Error";
+import error from "./pages/error";
 import UpdateProduct from "./pages/adminProducts/UpdateProduct"; 
 
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/admin/products" element={<ProductAdmin />} />
           <Route path="/admin/add-product" element={<AddProduct />} />
           <Route path="/admin/update-product/:id" element={<UpdateProduct />} />
-          <Route path={"/error"} element={<Error/>}/>
+          <Route path={"/error"} element={<error/>}/>
           <Route path={"*"} element={<NotFound/>}/>
         </Routes>
       </Template>

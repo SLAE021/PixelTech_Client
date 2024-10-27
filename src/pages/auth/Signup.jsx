@@ -27,7 +27,7 @@ function Signup() {
       const response = await service.post("/auth/Signup", newUser);
       localStorage.setItem("authToken", response.data.authToken);
       //mostrar mensaje de exito y redireccionar a la landing page
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

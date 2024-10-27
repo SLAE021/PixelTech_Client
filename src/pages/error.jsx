@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Error() {
+function error() {
   return (
     <div>
         
@@ -11,4 +11,4 @@ function Error() {
   )
 }
 
-export default Error
+export default error
