@@ -32,11 +32,11 @@ function Landing() {
         </p>
         <div className="d-flex justify-content-center">
           <Link to="/products" className="btn btn-primary" replace>
-            Explorar Productos
+            Ver Mas
           </Link>
         </div>
       </div>
-      <h2 className="text-muted text-center mt-4 mb-3">Nuevos Productos</h2>
+      <h2 className="text-muted text-center mt-4 mb-3">Productos</h2>
       <div className="container pb-5 px-lg-5">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5">
           {products.map((product) => (
@@ -59,7 +59,7 @@ function Landing() {
                       className="btn btn-outline-dark"
                       replace
                     >
-                      Ver más
+                      Detalles
                     </Link>
                   </div>
                 </div>
@@ -74,7 +74,7 @@ function Landing() {
           <a href="!#" className="me-3">
             <FontAwesomeIcon icon={["fab", "facebook"]} size="2x" />
           </a>
-          <a href="!#">
+          <a href="*">
             <FontAwesomeIcon icon={["fab", "instagram"]} size="2x" />
           </a>
           <a href="https://github.com/SLAE021" className="ms-3">
