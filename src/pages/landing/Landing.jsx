@@ -1,5 +1,4 @@
 import Banner from "./Banner";
-import FeatureProduct from "./FeatureProduct";
 import { useState, useEffect } from "react";
 import ScrollToTopOnMount from "../template/ScrollToTopOnMount";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,7 +46,7 @@ function Landing() {
                   className="card-img-top bg-dark cover"
                   height="240"
                   alt=""
-                  src={product.Image}
+                  src={product.image}
                 />
                 <div className="card-body">
                   <h5 className="card-title text-center">{product.name}</h5>
@@ -56,7 +55,7 @@ function Landing() {
                   </p>
                   <div className="d-grid gap-2">
                     <Link
-                      to="/products/1"
+                      to={`/products/${product._id}`}
                       className="btn btn-outline-dark"
                       replace
                     >
@@ -78,8 +77,8 @@ function Landing() {
           <a href="!#">
             <FontAwesomeIcon icon={["fab", "instagram"]} size="2x" />
           </a>
-          <a href="!#" className="ms-3">
-            <FontAwesomeIcon icon={["fab", "twitter"]} size="2x" />
+          <a href="https://github.com/SLAE021" className="ms-3">
+            <FontAwesomeIcon icon={["fab", "github"]} size="2x" />
           </a>
         </div>
       </div>

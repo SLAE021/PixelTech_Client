@@ -1,35 +1,85 @@
-import { useState } from "react";
-import service from "../../../services/config";
-//import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import service from "../../services/config";
+import { useNavigate } from 'react-router-dom';
 
-function AddProduct() {
+
+function UpdateProduct() {
+  const navigate = useNavigate(); // Use the useNavigate hook
+  const [product, setProduct] = useState(null);
+  const { id } = useParams(); // Obtén el id del producto desde la URL
   const [productName, setProductName] = useState("");
   const [productDescription, setproductDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  //const [productImage, setProductImage] = useState(null);
+  const [productImage, setProductImage] = useState(null);
   const [productCategory, setProductCategory] = useState("");
   const [errors, setErrors] = useState({});
+  const [showAlert, setShowAlert] = useState(false); // State to manage alert visibility
+  const [isUploading, setIsUploading] = useState(false); // for a loading animation effect
 
-  /*  const handleImageChange = (e) => {
-        const file = e.target.files[0];
-       
-        setProductImage("");
-    }; */
+  console.log("ProductDetail id:", id);
+ 
+  // Carga de datos del producto desde la API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await service.get(`/products/${id}`);
+        setProduct(response.data);
+        setProductName(response.data.name);
+        setproductDescription(response.data.description);
+        setProductPrice(response.data.price);
+        setProductImage(response.data.image);
+        setProductCategory(response.data.category);
+
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [id]);
+
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
+
+    const handleImageChange = async (event) => {
+      if (!event.target.files[0]) {
+        return;
+      }
+
+      setIsUploading(true); // to start the loading animation
+
+      const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+      uploadData.append("image", event.target.files[0]);
+
+      try {
+        const response = await service.post("/upload", uploadData)
+        setProductImage(response.data.imageUrl);
+        setIsUploading(false); // to stop the loading animation
+      } catch (error) {
+        navigate("/error");
+      }
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let validationErrors = {};
     if (!productName)
-      validationErrors.productName = "Product Name Can't Be Empty";
+      validationErrors.productName = "Nombre del producto no puede estar vacio";
     if (!productDescription)
       validationErrors.productDescription =
-        "Product Description Can't Be Empty";
+        "Descripcion del producto no puede estar vacio";
     if (!productPrice)
-      validationErrors.productPrice = "Product Price Can't Be Empty";
-    //if (!productImage) validationErrors.productImage = "Product Image Can't Be Empty";
+      validationErrors.productPrice = "Precio del producto no puede estar vacio";
+    if (isNaN(productPrice))
+      validationErrors.productPrice = "Precio del producto debe ser numerico";
+    //if (!productImage) validationErrors.productImage = "Imagen del producto no puede estar vacio";
     if (!productCategory)
-      validationErrors.productCategory = "Product Category Can't Be Empty";
+      validationErrors.productCategory = "Categoria del producto no puede estar vacio";
 
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
@@ -38,30 +88,34 @@ function AddProduct() {
     formData.append("name", productName);
     formData.append("description", productDescription);
     formData.append("price", productPrice);
-    // formData.append("image", productImage);
+    formData.append("image", productImage);
     formData.append("category", productCategory);
 
     try {
       const storedToken = localStorage.getItem("authToken");
-      const response = await service.post("/products", formData, {
+      console.log(JSON.stringify(formData));
+      const response = await service.patch(`/products/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${storedToken}`,
         },
       });
-      console.log("aqui se agrego", storedToken);
-      /* const response = await axios.post("/products", formData, {
-                headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${storedToken}` },
-            });
-            console.log("Product added:", response.data); */
 
-      console.log("Product added:", response.data);
+      console.log("Product updated:", response.data);
 
       setProductName("");
       setproductDescription("");
       setProductPrice("");
       setProductImage(null);
       setProductCategory("");
+
+      // Show success alert
+      setShowAlert(true);
+
+      // Navigate to another page after a delay
+      setTimeout(() => {
+        navigate('/admin/products');
+      }, 5000); // Adjust the delay as needed
     } catch (error) {
       console.error("Error adding product:", error);
     }
@@ -70,12 +124,17 @@ function AddProduct() {
   return (
     <section>
       <div className="container-fluid">
-        <div className="row ">
+        <div className="row justify-content-center">
           <div className="col-lg-10 col-md-8 ml-auto">
-            <div className="row align-items-center pt-md-5 mt-md-5 mb-5">
-              <div className="col-12">
-                <div className="card">
-                  <div className="card-title text-center mt-3">
+            <div className="row pt-md-5 mt-md-5 mb-5">
+              <div className="col-12 ">
+                {showAlert && (
+                  <div className="alert alert-success" role="alert">
+                    Producto agregado con exito!
+                  </div>
+                )}
+                <div className="card col-lg-8 col-md-6 ">
+                  <div className="card-title mt-3">
                     <h3>Agregar producto</h3>
                   </div>
                   <div className="card-body">
@@ -162,26 +221,46 @@ function AddProduct() {
                         )}
                       </div>
 
-                      {/* <p>Imagen del producto:</p>
-                                            <div className="custom-file">
-                                                <input
-                                                    type="file"
-                                                    className={`custom-file-input ${errors.productImage ? 'is-invalid' : ''}`}
-                                                    id="productimage"
-                                                    onChange={handleImageChange}
-                                                    required
-                                                />
-                                                <label className="custom-file-label" htmlFor="productimage">
-                                                    {productImage ? productImage.name : "Selecione archivo.."}
-                                                </label>
-                                                {errors.productImage && <div className="invalid-feedback">{errors.productImage}</div>}
-                                            </div> */}
+                      <p>Imagen del producto:</p>
+                      <div className="custom-file">
+                        <input
+                          type="file"
+                          className={`custom-file-input ${
+                            errors.productImage ? "is-invalid" : ""
+                          }`}
+                          id="productimage"
+                          onChange={handleImageChange}
+                          required
+                          disabled={isUploading}
+                        />
+                        <label
+                          className="custom-file-label"
+                          htmlFor="productimage"
+                        >
+                          {productImage
+                            ? productImage.name
+                            : "Selecione archivo.."}
+                        </label>
+                        {errors.productImage 
+                         
+                        //&&  (
+                          // <div className="invalid-feedback">
+                          //   {errors.productImage}
+                          // </div>
+                        //)
+                        }
+                        {/* to render a loading message or spinner while uploading the picture */}
+                        {isUploading ? <h3>... subiendo imagen</h3> : null}
+
+                        {/* below line will render a preview of the image from cloudinary */}
+                        {productImage ? (<div><img src={productImage} alt="img" width={200} /></div>) : null}
+                      </div>
 
                       <button
                         className="btn btn-dark mt-5 mx-auto d-block"
                         type="submit"
                       >
-                        Agregar Producto
+                        Actualizar Producto
                       </button>
                     </form>
                   </div>
@@ -195,4 +274,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default UpdateProduct;

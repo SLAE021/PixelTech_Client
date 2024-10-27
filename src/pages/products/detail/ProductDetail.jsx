@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import ScrollToTopOnMount from "../../template/ScrollToTopOnMount";
 import service from "../../../services/config";
-import { RiseLoader } from "react-spinners";
+
 
 function ProductDetail() {
   const [product, setProduct] = useState(null);
-  const { id } = useParams();
-  L;
+  const { id } = useParams(); // Obtén el id del producto desde la URL
 
+  console.log("ProductDetail id:", id);
+ 
+  // Carga de datos del producto desde la API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -22,32 +24,19 @@ function ProductDetail() {
     fetchProducts();
   }, [id]);
 
+
   if (!product) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <RiseLoader color="#462ff7" />
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="container mt-5 py-4 px-xl-5">
-      <ScrollToTopOnMount />
+      <ScrollToTopOnMount/>
       <nav aria-label="breadcrumb" className="bg-custom-light rounded mb-4">
         <ol className="breadcrumb p-3">
           <li className="breadcrumb-item">
-            <Link
-              className="text-decoration-none link-secondary"
-              to="/products"
-            >
-              Todos los Productos
+            <Link className="text-decoration-none link-secondary" to="/products">
+              All Products
             </Link>
           </li>
           <li className="breadcrumb-item">
@@ -77,8 +66,12 @@ function ProductDetail() {
                 );
               })} */}
               <a key="1" href="!#">
-                <img className={"rounded mb-2 ratio opacity-6"} alt="" src="" />
-              </a>
+                    <img
+                      className={"rounded mb-2 ratio opacity-6"}
+                      alt=""
+                      src=""
+                    />
+                  </a>
             </div>
           </div>
         </div>
@@ -102,22 +95,24 @@ function ProductDetail() {
             <div className="row g-3 mb-4">
               <div className="col">
                 <button className="btn btn-outline-dark py-2 w-100">
-                  Agregar al Carrito
+                  Add to cart
                 </button>
               </div>
               <div className="col">
-                <button className="btn btn-dark py-2 w-100">Comprar</button>
+                <button className="btn btn-dark py-2 w-100">Buy now</button>
               </div>
             </div>
 
-            <h4 className="mb-0">Detalles</h4>
+            <h4 className="mb-0">Details</h4>
             <hr />
             <dl className="row">
-              <dt className="col-sm-4">Categoria</dt>
+
+              <dt className="col-sm-4">Category</dt>
               <dd className="col-sm-8 mb-3">{product.category}</dd>
+
             </dl>
 
-            <h4 className="mb-0">Descripcion</h4>
+            <h4 className="mb-0">Description</h4>
             <hr />
             <p className="lead flex-shrink-0">
               <small>{product.description}</small>
