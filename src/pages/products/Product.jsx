@@ -11,7 +11,13 @@ function Product() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('https://pixeltech-server.onrender.com/api/products');
-        setProducts(response.data);
+        
+        // Filtrar productos duplicados usando un Set basado en `product._id`
+        const uniqueProducts = response.data.filter((product, index, self) =>
+          index === self.findIndex((p) => p._id === product._id)
+        );
+
+        setProducts(uniqueProducts);
       } catch (error) {
         console.error('Error al cargar productos:', error);
       }
