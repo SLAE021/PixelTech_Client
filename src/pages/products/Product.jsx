@@ -38,7 +38,7 @@ function Product(props) {
         </Link>
         <div className="card-body">
           <h5 className="card-title text-center text-dark text-truncate">
-            Muestra
+            hola
           </h5>
           <p className="card-text text-center text-muted mb-0">{offPrice}</p>
           <div className="d-grid d-block">
