@@ -67,7 +67,7 @@ function Product() {
                 <p className="card-text text-center text-muted mb-0">{offPrice}</p>
                 <div className="d-grid d-block">
                   <button className="btn btn-outline-dark mt-3">
-                    <FontAwesomeIcon icon={['fas', 'cart-plus']} /> Agregar al Carrito
+                    <FontAwesomeIcon icon={['fas', '']} /> Dejar Review
                   </button>
                 </div>
               </div>
